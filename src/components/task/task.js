@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import "./task.css";
 import { formatDistanceToNow } from "date-fns";
 
-let dataNow = formatDistanceToNow(new Date());
+let dateNow = formatDistanceToNow(new Date());
 
 export default class Task extends Component {
   state = {
-    completed: false,
-    editing: false,
+    isCompleted: false,
+    isEditing: false,
   };
 
   onCheckboxClick = () => {
     this.setState((state) => {
       return {
-        completed: !state.completed,
+        isCompleted: !state.isCompleted,
       };
     });
   };
@@ -21,17 +21,33 @@ export default class Task extends Component {
   onIconEditClick = () => {
     this.setState((state) => {
       return {
-        editing: !state.editing,
+        isEditing: !state.isEditing,
       };
     });
   };
 
   render() {
-    const { label } = this.props;
-    const { completed, editing } = this.state;
+    const { label, onDeleted } = this.props;
+    const { isCompleted, isEditing } = this.state;
     let classNames = "description";
-    if (completed) {
+    if (isCompleted) {
       classNames += " completed";
+    }
+
+    function Item({ label, isEditing }) {
+      if (isEditing) {
+        return (
+          <input
+            type="text"
+            className="edit"
+            onChange={(e) => {
+              label = e.target.value;
+            }}
+            value={label}
+          ></input>
+        );
+      }
+      return <span className={classNames}>{label}</span>;
     }
 
     return (
@@ -42,16 +58,14 @@ export default class Task extends Component {
           onClick={this.onCheckboxClick}
         ></input>
         <label>
-          <input type="text" class="edit" value="Editing task"></input>
-          <input type="text" class="edit" value="Editing task"></input>
-          <span className={classNames}>{label}</span>
-          <span className="created">created {dataNow} ago</span>
+          <Item isEditing={isEditing} label={label} />
+          <span className="created">created {dateNow} ago</span>
         </label>
         <button
           className="icon icon-edit"
           onClick={this.onIconEditClick}
         ></button>
-        <button className="icon icon-destroy"></button>
+        <button className="icon icon-destroy" onClick={onDeleted}></button>
       </div>
     );
   }

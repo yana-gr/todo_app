@@ -11,6 +11,15 @@ span.completed {
   text-decoration: line-through;
 }
 
+form {
+  display: flex;
+  flex-grow: 1;
+}
+
+.hidden {
+  display: none;
+}
+
 .edit {
   position: relative;
   margin: 0;

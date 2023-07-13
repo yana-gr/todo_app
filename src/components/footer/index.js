@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import TasksFilter from "../tasks-filter";
-import "./footer.css";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+import TasksFilter from '../tasks-filter'
+import './footer.css'
 
 export default class Footer extends Component {
   static propTypes = {
@@ -10,16 +11,10 @@ export default class Footer extends Component {
     onFilterAll: PropTypes.func,
     onFilterCompleted: PropTypes.func,
     deleteAllCompleted: PropTypes.func,
-  };
+  }
 
   render() {
-    const {
-      leftItemCount,
-      onFilterActive,
-      onFilterAll,
-      onFilterCompleted,
-      deleteAllCompleted,
-    } = this.props;
+    const { leftItemCount, onFilterActive, onFilterAll, onFilterCompleted, deleteAllCompleted } = this.props
 
     return (
       <footer className="footer">
@@ -33,6 +28,6 @@ export default class Footer extends Component {
           Clear completed
         </button>
       </footer>
-    );
+    )
   }
 }

@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import "./tasks-filter.css";
+import './tasks-filter.css'
 
 export default class TasksFilter extends Component {
   static propTypes = {
     onFilterActive: PropTypes.func,
     onFilterAll: PropTypes.func,
     onFilterCompleted: PropTypes.func,
-  };
+  }
 
   render() {
-    const { onFilterActive, onFilterAll, onFilterCompleted } = this.props;
+    const { onFilterActive, onFilterAll, onFilterCompleted } = this.props
     return (
       <ul className="filters">
         <li className="filters-item">
@@ -24,6 +24,6 @@ export default class TasksFilter extends Component {
           <button onClick={onFilterCompleted}>Completed</button>
         </li>
       </ul>
-    );
+    )
   }
 }

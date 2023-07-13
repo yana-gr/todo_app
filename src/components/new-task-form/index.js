@@ -1,19 +1,19 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 
 export default class NewTaskForm extends Component {
   state = {
-    label: "",
-  };
+    label: '',
+  }
 
   onLabelChange = (e) => {
-    this.setState({ label: e.target.value });
-  };
+    this.setState({ label: e.target.value })
+  }
 
   onSubmit = (e) => {
-    e.preventDefault();
-    this.props.onItemAdded(this.state.label);
-    this.setState({ label: "" });
-  };
+    e.preventDefault()
+    this.props.onItemAdded(this.state.label)
+    this.setState({ label: '' })
+  }
 
   render() {
     return (
@@ -27,6 +27,6 @@ export default class NewTaskForm extends Component {
           autoFocus
         />
       </form>
-    );
+    )
   }
 }

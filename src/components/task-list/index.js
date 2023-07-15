@@ -7,9 +7,9 @@ import './task-list.css'
 export default class TaskList extends Component {
   static propTypes = {
     tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
-    onDeleted: PropTypes.func,
-    onToggleCompleted: PropTypes.func,
-    onEditing: PropTypes.func,
+    onDeleted: PropTypes.func.isRequired,
+    onToggleCompleted: PropTypes.func.isRequired,
+    onEditing: PropTypes.func.isRequired,
   }
 
   render() {

@@ -7,9 +7,9 @@ import TimerCounter from '../timer-counter'
 export default class Task extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
-    onDeleted: PropTypes.func,
-    onToggleCompleted: PropTypes.func,
-    onEditing: PropTypes.func,
+    onDeleted: PropTypes.func.isRequired,
+    onToggleCompleted: PropTypes.func.isRequired,
+    onEditing: PropTypes.func.isRequired,
     isCompleted: PropTypes.bool.isRequired,
     isHidden: PropTypes.bool.isRequired,
     isEditing: PropTypes.bool.isRequired,
@@ -42,7 +42,7 @@ export default class Task extends Component {
     }
 
     let item
-    let checkbox = <input className="toggle" type="checkbox" onClick={onToggleCompleted}></input>
+    const checkbox = <input className="toggle" type="checkbox" onClick={onToggleCompleted} />
 
     if (isEditing) {
       item = (
@@ -50,7 +50,7 @@ export default class Task extends Component {
           {checkbox}
           <label>
             <form onSubmit={this.onSubmit}>
-              <input type="text" className="edit" onChange={this.onLabelChange} value={this.label}></input>
+              <input type="text" className="edit" onChange={this.onLabelChange} value={this.label} />
             </form>
           </label>
         </div>
@@ -63,8 +63,8 @@ export default class Task extends Component {
             <span className={classNames}>{label}</span>
             <TimerCounter />
           </label>
-          <button className="icon icon-edit" onClick={onEditing}></button>
-          <button className="icon icon-destroy" onClick={onDeleted}></button>
+          <button type="button" className="icon icon-edit" onClick={onEditing} />
+          <button type="button" className="icon icon-destroy" onClick={onDeleted} />
         </div>
       )
     }

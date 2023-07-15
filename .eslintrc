@@ -11,30 +11,49 @@
     "plugin:import/errors",
     "plugin:import/warnings",
     "airbnb",
-    "airbnb/hooks",
-    "plugin:react/jsx-runtime",
     "prettier"
   ],
-  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-
-    "ecmaVersion": "lastest",
+    "ecmaVersion": 12,
     "sourceType": "module",
-    "requireConfigFile": false
+    "requireConfigFile": false,
+    "babelOptions": {
+      "parserOpts": {
+        "plugins": ["jsx"]
+      }
+    }
   },
-  "plugins": ["react", "prettier", "import", "react-hooks", "jsx-a11y"],
+  "parser": "@babel/eslint-parser",
+  "plugins": ["react", "prettier", "import"],
   "rules": {
-    "indent": ["error", 2],
+    "class-methods-use-this": "off",
     "prettier/prettier": "error",
     "linebreak-style": [0, "unix"],
     "quotes": ["error", "single"],
     "semi": ["error", "never"],
+    "no-param-reassign": "error",
+    "react/prefer-stateless-function": "off",
+    "react/destructuring-assignment": "off",
+    "jsx-a11y/no-autofocus": "off",
+    "import/no-extraneous-dependencies": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/no-access-state-in-setstate": "off",
+    "array-callback-return": "off",
+    "react/sort-comp": "off",
+    "consistent-return": "off",
+    "import/prefer-default-export": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": 0,
-    "import/no-unresolved": [2, { "commonjs": true, "amd": true }],
+    "react/state-in-constructor": "off",
+    "react/static-property-placement": "off",
+    "react/jsx-props-no-spreading": "off",
+    "no-plusplus": "off",
+    "no-new": 0,
+    "import/no-unresolved": [2, { "caseSensitive": false }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "import/order": [
       2,

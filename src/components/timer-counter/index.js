@@ -11,7 +11,7 @@ export default class TimerCounter extends Component {
   creatingDate = new Date()
 
   updateInterval = () => {
-    let currentDate = setInterval(() => {
+    const currentDate = setInterval(() => {
       new Date()
     }, this.props.Interval)
     return formatDistanceToNow(this.creatingDate, currentDate)

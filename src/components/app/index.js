@@ -98,36 +98,53 @@ export default class App extends Component {
 
   onFilterAll = () => {
     this.setState(({ taskData }) => {
-      let newtaskData = taskData.slice()
-      newtaskData.forEach((item) => {
-        item.isHidden = false
+      const newTaskData = []
+      taskData.forEach((item) => {
+        if (!item.isHidden) {
+          newTaskData.push(item)
+        } else {
+          const newItem = { ...item, isHidden: !item.isHidden }
+          newTaskData.push(newItem)
+        }
       })
       return {
-        taskData: newtaskData,
+        taskData: newTaskData,
       }
     })
   }
 
   onFilterActive = () => {
     this.setState(({ taskData }) => {
-      let newtaskData = taskData.slice()
-      newtaskData.forEach((item) => {
-        item.isCompleted ? (item.isHidden = true) : (item.isHidden = false)
+      const newTaskData = []
+      taskData.forEach((item) => {
+        if (item.isCompleted) {
+          const newItem = { ...item, isHidden: true }
+          newTaskData.push(newItem)
+        } else {
+          const newItem = { ...item, isHidden: false }
+          newTaskData.push(newItem)
+        }
       })
       return {
-        taskData: newtaskData,
+        taskData: newTaskData,
       }
     })
   }
 
   onFilterCompleted = () => {
     this.setState(({ taskData }) => {
-      let newtaskData = taskData.slice()
-      newtaskData.forEach((item) => {
-        item.isCompleted ? (item.isHidden = false) : (item.isHidden = true)
+      const newTaskData = []
+      taskData.forEach((item) => {
+        if (item.isCompleted) {
+          const newItem = { ...item, isHidden: false }
+          newTaskData.push(newItem)
+        } else {
+          const newItem = { ...item, isHidden: true }
+          newTaskData.push(newItem)
+        }
       })
       return {
-        taskData: newtaskData,
+        taskData: newTaskData,
       }
     })
   }

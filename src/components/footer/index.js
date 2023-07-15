@@ -6,11 +6,11 @@ import './footer.css'
 
 export default class Footer extends Component {
   static propTypes = {
-    leftItemCount: PropTypes.number,
-    onFilterActive: PropTypes.func,
-    onFilterAll: PropTypes.func,
-    onFilterCompleted: PropTypes.func,
-    deleteAllCompleted: PropTypes.func,
+    leftItemCount: PropTypes.number.isRequired,
+    onFilterActive: PropTypes.func.isRequired,
+    onFilterAll: PropTypes.func.isRequired,
+    onFilterCompleted: PropTypes.func.isRequired,
+    deleteAllCompleted: PropTypes.func.isRequired,
   }
 
   render() {
@@ -24,7 +24,7 @@ export default class Footer extends Component {
           onFilterActive={() => onFilterActive()}
           onFilterCompleted={() => onFilterCompleted()}
         />
-        <button className="clear-completed" onClick={deleteAllCompleted}>
+        <button type="button" className="clear-completed" onClick={deleteAllCompleted}>
           Clear completed
         </button>
       </footer>

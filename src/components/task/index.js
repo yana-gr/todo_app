@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import './task.css'
+import Timer from '../timer'
 import TimerCounter from '../timer-counter'
+// import { min } from 'date-fns'
 
 export default class Task extends Component {
   static propTypes = {
@@ -31,7 +33,20 @@ export default class Task extends Component {
   }
 
   render() {
-    const { label, onDeleted, onToggleCompleted, onEditing, isCompleted, isHidden, isEditing } = this.props
+    const {
+      label,
+      onDeleted,
+      onToggleCompleted,
+      onEditing,
+      isCompleted,
+      isHidden,
+      isEditing,
+      minStart,
+      secStart,
+      runTimer,
+      stopTimer,
+      id,
+    } = this.props
     let classNames = 'description'
     if (isCompleted) {
       classNames += ' completed'
@@ -61,6 +76,7 @@ export default class Task extends Component {
           {checkbox}
           <label>
             <span className={classNames}>{label}</span>
+            <Timer minStart={minStart} secStart={secStart} runTimer={runTimer} stopTimer={stopTimer} id={id} />
             <TimerCounter />
           </label>
           <button type="button" className="icon icon-edit" onClick={onEditing} />

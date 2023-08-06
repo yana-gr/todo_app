@@ -13,7 +13,7 @@ export default class TaskList extends Component {
   }
 
   render() {
-    const { tasks, onDeleted, onToggleCompleted, onEditing } = this.props
+    const { tasks, onDeleted, onToggleCompleted, onEditing, runTimer, stopTimer } = this.props
 
     const elements = tasks.map((item) => {
       const { id, ...itemProps } = item
@@ -25,6 +25,8 @@ export default class TaskList extends Component {
             onToggleCompleted={() => onToggleCompleted(id)}
             onEditing={() => onEditing(id)}
             editedItem={this.props.editedItem}
+            runTimer={runTimer}
+            stopTimer={stopTimer}
             id={id}
           />
         </li>

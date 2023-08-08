@@ -184,41 +184,37 @@ export default class App extends Component {
   runTimer = (id) => {
     const idx = this.state.taskData.findIndex((el) => el.id === id)
     const oldItem = this.state.taskData[idx]
+    const numberTimer = this.allTimers.find((timer) => {
+      if (Number(timer.id) === Number(id)) return timer
+    })
+    if (!numberTimer) {
+      const newTimer = setInterval(() => {
+        if (oldItem.allSeconds > 0) {
+          this.setState(({ taskData }) => {
+            const allSecondsCount = Number((oldItem.allSeconds -= 1))
+            const minutes = Math.floor(Number(oldItem.allSeconds) / 60)
+            const seconds = Math.round(
+              (Number(oldItem.allSeconds) / 60 - Math.trunc(Number(oldItem.allSeconds) / 60)) * 60
+            )
+            const newItem = {
+              ...oldItem,
+              secStart: seconds,
+              minStart: minutes,
+              allSeconds: allSecondsCount,
+              isRunningTimer: true,
+              timer: this.newTimer,
+            }
+            const newTaskData = [...taskData.slice(0, idx), newItem, ...taskData.slice(idx + 1)]
 
-    // this.setState(({ taskData }) => {
-    //   const newItem = { ...oldItem, isRunningTimer: !oldItem.isRunningTimer }
-    //   const newTaskData = [...taskData.slice(0, idx), newItem, ...taskData.slice(idx + 1)]
-    //   return {
-    //     taskData: newTaskData,
-    //   }
-    // })
-
-    const newTimer = setInterval(() => {
-      if (oldItem.allSeconds > 0) {
-        this.setState(({ taskData }) => {
-          const allSecondsCount = Number((oldItem.allSeconds -= 1))
-          const minutes = Math.floor(Number(oldItem.allSeconds) / 60)
-          const seconds = Math.round(
-            (Number(oldItem.allSeconds) / 60 - Math.trunc(Number(oldItem.allSeconds) / 60)) * 60
-          )
-          const newItem = {
-            ...oldItem,
-            secStart: seconds,
-            minStart: minutes,
-            allSeconds: allSecondsCount,
-            isRunningTimer: true,
-            timer: this.newTimer,
-          }
-          const newTaskData = [...taskData.slice(0, idx), newItem, ...taskData.slice(idx + 1)]
-
-          return {
-            taskData: newTaskData,
-          }
-        })
-        localStorage.setItem(oldItem.id, oldItem.allSeconds - 1)
-      }
-    }, 1000)
-    this.allTimers.push({ id, newTimer })
+            return {
+              taskData: newTaskData,
+            }
+          })
+          localStorage.setItem(oldItem.id, oldItem.allSeconds - 1)
+        }
+      }, 1000)
+      this.allTimers.push({ id, newTimer })
+    }
   }
 
   stopTimer = (id) => {

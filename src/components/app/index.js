@@ -30,7 +30,7 @@ export default function App() {
   ]
   const [taskData, setTaskData] = useState(firstTaskData)
 
-  useEffect(() => {
+  const createNewtaskData = useCallback(() => {
     const newTaskData = taskData.map((task) => {
       for (let i = 0; i < localStorage.length; i++) {
         const localStorageTaskID = localStorage.key(i)
@@ -50,8 +50,12 @@ export default function App() {
       return task
     })
     setTaskData(newTaskData)
-    return () => allTimers.forEach((timer) => clearInterval(timer.newTimer))
   }, [taskData])
+
+  useEffect(() => {
+    createNewtaskData()
+    return () => allTimers.forEach((timer) => clearInterval(timer.newTimer))
+  }, [createNewtaskData])
 
   const deleteItem = (id) => {
     const idx = taskData.findIndex((el) => el.id === id)

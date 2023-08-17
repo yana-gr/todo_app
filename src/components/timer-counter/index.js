@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { formatDistanceToNow } from 'date-fns'
 
 import './timer-counter.css'
@@ -8,7 +8,8 @@ export default function TimerCounter() {
     Interval: 60000,
   }
 
-  const creatingDate = new Date()
+  const [creatingDate] = useState(new Date())
+  // const creatingDate = new Date()
 
   const updateInterval = () => {
     const currentDate = setInterval(() => {

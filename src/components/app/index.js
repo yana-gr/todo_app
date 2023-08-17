@@ -9,18 +9,21 @@ import NewTaskForm from '../new-task-form'
 export default function App() {
   let maxID = 100
 
-  const allTimers = []
+  // const allTimers = []
+
+  const newID = useCallback(() => maxID++, [])
 
   const createTodoItem = (label, minStart, secStart) => ({
     label,
     isCompleted: false,
     isEditing: false,
     isHidden: false,
-    id: maxID++,
+    id: newID(),
     minStart,
     secStart,
     allSeconds: Number(minStart) * 60 + Number(secStart),
     isRunningTimer: false,
+    timer: null,
   })
 
   const firstTaskData = [
@@ -29,8 +32,9 @@ export default function App() {
     createTodoItem('Active task', '00', '10'),
   ]
   const [taskData, setTaskData] = useState(firstTaskData)
+  const [allTimers, setAllTimers] = useState([])
 
-  const createNewtaskData = useCallback(() => {
+  useEffect(() => {
     const newTaskData = taskData.map((task) => {
       for (let i = 0; i < localStorage.length; i++) {
         const localStorageTaskID = localStorage.key(i)
@@ -50,12 +54,9 @@ export default function App() {
       return task
     })
     setTaskData(newTaskData)
-  }, [taskData])
 
-  useEffect(() => {
-    createNewtaskData()
     return () => allTimers.forEach((timer) => clearInterval(timer.newTimer))
-  }, [createNewtaskData])
+  }, [])
 
   const deleteItem = (id) => {
     const idx = taskData.findIndex((el) => el.id === id)
@@ -75,12 +76,6 @@ export default function App() {
     setTaskData(newTaskData)
   }
 
-  const editItem = (id, newLabel) => {
-    let newTaskData = taskData.slice()
-    newTaskData = newTaskData.map((el) => (el.id === id ? { ...el, label: newLabel } : el))
-    setTaskData(newTaskData)
-  }
-
   const onToggleEditing = (id) => {
     const idx = taskData.findIndex((el) => el.id === id)
 
@@ -88,6 +83,19 @@ export default function App() {
     const newItem = {
       ...oldItem,
       isEditing: !oldItem.isEditing,
+    }
+    const newTaskData = [...taskData.slice(0, idx), newItem, ...taskData.slice(idx + 1)]
+    setTaskData(newTaskData)
+  }
+
+  const editItem = (id, newLabel) => {
+    const idx = taskData.findIndex((el) => el.id === id)
+
+    const oldItem = taskData[idx]
+    const newItem = {
+      ...oldItem,
+      isEditing: !oldItem.isEditing,
+      label: newLabel,
     }
     const newTaskData = [...taskData.slice(0, idx), newItem, ...taskData.slice(idx + 1)]
     setTaskData(newTaskData)
@@ -175,8 +183,10 @@ export default function App() {
           localStorage.setItem(oldItem.id, oldItem.allSeconds - 1)
         }
       }, 1000)
-      allTimers.push({ id, newTimer })
+      setAllTimers([...allTimers, { id, newTimer }])
     }
+    // console.log(taskData)
+    // console.log(allTimers)
   }
 
   const stopTimer = (id) => {

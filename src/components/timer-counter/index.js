@@ -9,7 +9,6 @@ export default function TimerCounter() {
   }
 
   const [creatingDate] = useState(new Date())
-  // const creatingDate = new Date()
 
   const updateInterval = () => {
     const currentDate = setInterval(() => {
@@ -20,22 +19,3 @@ export default function TimerCounter() {
 
   return <span className="created">created {updateInterval()} ago</span>
 }
-
-// export default class TimerCounter extends Component {
-//   static defaultProps = {
-//     Interval: 60000,
-//   }
-
-//   creatingDate = new Date()
-
-//   updateInterval = () => {
-//     const currentDate = setInterval(() => {
-//       new Date()
-//     }, this.props.Interval)
-//     return formatDistanceToNow(this.creatingDate, currentDate)
-//   }
-
-//   render() {
-//     return <span className="created">created {this.updateInterval()} ago</span>
-//   }
-// }

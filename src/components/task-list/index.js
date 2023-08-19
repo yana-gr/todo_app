@@ -34,36 +34,3 @@ TaskList.propTypes = {
   onToggleCompleted: PropTypes.func.isRequired,
   onEditing: PropTypes.func.isRequired,
 }
-
-// export default class TaskList extends Component {
-//   static propTypes = {
-//     tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
-//     onDeleted: PropTypes.func.isRequired,
-//     onToggleCompleted: PropTypes.func.isRequired,
-//     onEditing: PropTypes.func.isRequired,
-//   }
-
-//   render() {
-//     const { tasks, onDeleted, onToggleCompleted, onEditing, runTimer, stopTimer } = this.props
-
-//     const elements = tasks.map((item) => {
-//       const { id, ...itemProps } = item
-//       return (
-//         <li key={id}>
-//           <Task
-//             {...itemProps}
-//             onDeleted={() => onDeleted(id)}
-//             onToggleCompleted={() => onToggleCompleted(id)}
-//             onEditing={() => onEditing(id)}
-//             editedItem={this.props.editedItem}
-//             runTimer={runTimer}
-//             stopTimer={stopTimer}
-//             id={id}
-//           />
-//         </li>
-//       )
-//     })
-
-//     return <ul className="todo-list">{elements}</ul>
-//   }
-// }

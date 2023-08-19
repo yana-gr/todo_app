@@ -35,7 +35,7 @@ export default function App() {
     const newTaskData = taskData.map((task) => {
       for (let i = 0; i < localStorage.length; i++) {
         const localStorageTaskID = localStorage.key(i)
-        if (Number(localStorageTaskID) === Number(task.id)) {
+        if (Number(localStorageTaskID) === Number(task.id) && localStorage.getItem(localStorage.key(i)) > 0) {
           const allSeconds = Number(localStorage.getItem(localStorageTaskID))
           const minutes = Math.floor(allSeconds / 60)
           const seconds = Math.round((allSeconds / 60 - Math.trunc(allSeconds / 60)) * 60)
